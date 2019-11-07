@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.0.0" />
+    <!-- <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" /> -->
+    <PackageReference Include="MongoDB.Driver" Version="2.10.0-beta1" />
+    <!-- <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.17" /> -->
+    <!-- <PackageReference Include="MySqlConnector" Version="0.60.0" /> -->
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.0.0-rc1.final" />
+    <PackageReference Include="Pomelo.JsonObject" Version="2.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alligator.Application.Contract\Alligator.Application.Contract.csproj" />
+    <ProjectReference Include="..\Alligator.Application\Alligator.Application.csproj" />
+    <ProjectReference Include="..\Alligator.Domain.Model\Alligator.Domain.Model.csproj" />
+    <ProjectReference Include="..\Alligator.Persistence.Contract\Alligator.Persistence.Contract.csproj" />
+    <ProjectReference Include="..\Alligator.Persistence\Alligator.Persistence.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alligator.Application.Contract\Alligator.Application.Contract.csproj" />
+    <ProjectReference Include="..\Alligator.Domain.Model\Alligator.Domain.Model.csproj" />
+    <ProjectReference Include="..\Alligator.Persistence.Contract\Alligator.Persistence.Contract.csproj" />
+    <ProjectReference Include="..\Alligator.Persistence\Alligator.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\..\Users\warammah\.nuget\packages\automapper\7.0.1\lib\netcoreapp2.0\AutoMapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
