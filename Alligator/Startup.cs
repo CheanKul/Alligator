@@ -5,15 +5,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Alligator.CustomConfig;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Alligator
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public Startup(IConfiguration configuration)
+
+        public IConfigurationBuilder en_US { get; set; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            en_US = new ConfigurationBuilder().AddJsonFile("en_US.json"); 
         }
 
 
@@ -30,6 +35,7 @@ namespace Alligator
             //For Getting current Context
             HttpServiceCollectionExtensions.AddHttpContextAccessor(services);
 
+           
 
             //Register Identity
             IdentityConfig.RegisterAppDatabase(services, Configuration);

@@ -1,55 +1,116 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 //using AutoMapper;
 using Alligator.Application.Contract;
+using Alligator.Domain;
 using Alligator.Domain.Model;
 using Alligator.Persistence.Contract;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Alligator.Application
 {
     public class UserApplication :IUserApplication
     {
         private IUserRepository userRepository;
-        //private readonly IMapper mapper;
-        public UserApplication(IUserRepository _userRepository) //, IMapper _mapper)
+        private readonly IResponseModel responseModel;
+
+        public UserApplication(IUserRepository _userRepository, IResponseModel responseModel)
         {
             userRepository = _userRepository;
-            //mapper = _mapper;
+            this.responseModel = responseModel;
         }
 
-        public User Create(User User)
+        public async Task<ResponseModel> Create(User User)
         {
-            return userRepository.Create(User);
+            User usr = userRepository.Create(User);
+            if (usr == null)
+            {
+                return responseModel.CreateResponse(HttpStatusCode.Unauthorized, "Check Credentials Again...!");
+            }
+
+            var claims = new[] {
+                new Claim (JwtRegisteredClaimNames.Sub, User.Email),
+                new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid ().ToString ())
+            };
+
+            var signitureKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyAdvanceSupperKey"));
+
+            var token = new JwtSecurityToken(
+                issuer: "http://oec.com",
+                audience: "http://oec.com",
+                expires: DateTime.UtcNow.AddHours(2),
+                claims: claims,
+                signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(signitureKey, SecurityAlgorithms.HmacSha256)
+
+            );
+            return responseModel.CreateResponse(HttpStatusCode.OK,"Welcome",
+            new {
+                Authenticated = true,
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            });
         }
 
-        public List<User> Get()
+        public async Task<ResponseModel> Get()
         {
-            return userRepository.Get();
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome", userRepository.Get());
         }
 
-        public User Get(string id)
+        public async Task<ResponseModel> Get(string id)
         {
-            return userRepository.Get(id);
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome", userRepository.Get(id));
         }
 
-        public User Get(string username,string password)
-        {
-            return userRepository.Get(username,password);
+        public async Task<ResponseModel> Get(string username,string password)
+        {            
+            var usr = userRepository.Get(username, password);
+            if (usr == null)
+            {
+                return responseModel.CreateResponse(HttpStatusCode.Unauthorized, "Check Credentials Again...!");
+            }
+
+            var claims = new[] {
+                new Claim (JwtRegisteredClaimNames.Sub, usr.Email),
+                new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid ().ToString ())
+            };
+
+            var signitureKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyAdvanceSupperKey"));
+
+            var token = new JwtSecurityToken(
+                issuer: "http://oec.com",
+                audience: "http://oec.com",
+                expires: DateTime.UtcNow.AddHours(2),
+                claims: claims,
+                signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(signitureKey, SecurityAlgorithms.HmacSha256)
+
+            );
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome",
+            new
+            {
+                Authenticated = true,
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            });
         }
 
-        public void Remove(User UserIn)
+        public async Task<ResponseModel> Remove(User UserIn)
         {
-            userRepository.Remove(UserIn);
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome", userRepository.Remove(UserIn));
         }
 
-        public void Remove(string id)
+        public async Task<ResponseModel> Remove(string id)
         {
-            userRepository.Remove(id);
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome", await Task.FromResult(userRepository.Remove(id)));
         }
 
-        public void Update(string id, User UserIn)
+        public async Task<ResponseModel> Update(string id, User UserIn)
         {
-            userRepository.Update(id,UserIn);
+            return responseModel.CreateResponse(HttpStatusCode.OK, "Welcome", userRepository.Update(id,UserIn));
         }
     }
 }

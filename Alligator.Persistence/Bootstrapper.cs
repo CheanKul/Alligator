@@ -11,7 +11,6 @@ namespace Alligator.Persistence
 
         public static void RegisterDependancies(IServiceCollection services)
         {
-            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoggerRepository, LoggerRepository>();
         }

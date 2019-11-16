@@ -14,11 +14,6 @@ namespace Alligator.Persistence {
                 _database = client.GetDatabase (settings.Value.Database);
         }
 
-        public IMongoCollection<Book> Books {
-            get {
-                return _database.GetCollection<Book> ("Book");
-            }
-        }
 
         public IMongoCollection<User> Users {
             get {
@@ -28,7 +23,6 @@ namespace Alligator.Persistence {
     }
 
     public interface IMongoDbContext {
-        IMongoCollection<Book> Books { get;}
         IMongoCollection<User> Users { get;}
     }
 }

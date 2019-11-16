@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Alligator.Domain;
 using Alligator.Domain.Model;
 
 namespace Alligator.Application.Contract
 {
     public interface IUserApplication
     {
-        User Create(User User);
-        List<User> Get();
-        User Get(string id);
-        User Get(string username, string password);
-        void Remove(User UserIn);
-        void Remove(string id);
-        void Update(string id, User UserIn);
+        Task<ResponseModel> Create(User User);
+        Task<ResponseModel> Get();
+        Task<ResponseModel> Get(string id);
+        Task<ResponseModel> Get(string username, string password);
+        Task<ResponseModel> Remove(User UserIn);
+        Task<ResponseModel> Remove(string id);
+        Task<ResponseModel> Update(string id, User UserIn);
     }
 }

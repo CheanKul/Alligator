@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Alligator.Domain.Model;
 
 namespace Alligator.Persistence.Contract
@@ -10,8 +11,8 @@ namespace Alligator.Persistence.Contract
         List<User> Get();
         User Get(string id);
         User Get(string username,string password);
-        void Remove(User UserIn);
-        void Remove(string id);
-        void Update(string id, User UserIn);
+        User Remove(User UserIn);
+        Task Remove(string id);
+        User Update(string id, User UserIn);
     }
 }

@@ -17,6 +17,11 @@ namespace Alligator {
             Host.CreateDefaultBuilder (args)
             .ConfigureWebHostDefaults (webBuilder => {
                 webBuilder.UseStartup<Startup> ();
+            }).ConfigureAppConfiguration((builderContext, config)=> {
+                var env = builderContext.HostingEnvironment;
+                config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"en_US.json", optional: true, reloadOnChange: true);
             });
     }
 }

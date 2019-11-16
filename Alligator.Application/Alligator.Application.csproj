@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Alligator.Application.Contract\Alligator.Application.Contract.csproj" />
     <ProjectReference Include="..\Alligator.Domain.Model\Alligator.Domain.Model.csproj" />
     <ProjectReference Include="..\Alligator.Persistence.Contract\Alligator.Persistence.Contract.csproj" />
