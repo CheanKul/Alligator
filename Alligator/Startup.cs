@@ -29,6 +29,9 @@ namespace Alligator
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+
+
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             SwaggerConfig.Register(services);
 
@@ -60,7 +63,7 @@ namespace Alligator
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            
 
             app.UseHttpsRedirection();
 

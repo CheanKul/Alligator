@@ -45,9 +45,6 @@ namespace Alligator.Controllers
         {
 
             return Ok(await userApp.Get(model.Username, model.Password));
-
-            
-
         }
 
         [HttpPost]

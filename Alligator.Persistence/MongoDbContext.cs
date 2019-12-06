@@ -17,12 +17,21 @@ namespace Alligator.Persistence {
 
         public IMongoCollection<User> Users {
             get {
-                return _database.GetCollection<User> ("User");
+                return _database.GetCollection<User> (nameof(Users));
+            }
+        }
+
+        public IMongoCollection<Technology> Technologies
+        {
+            get
+            {
+                return _database.GetCollection<Technology>(nameof(Technologies));
             }
         }
     }
 
     public interface IMongoDbContext {
         IMongoCollection<User> Users { get;}
+        IMongoCollection<Technology> Technologies { get; }
     }
 }
