@@ -64,7 +64,8 @@ namespace Alligator
                 app.UseExceptionHandler("/Error");
             }
             
-
+            app.UseStaticFiles();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
