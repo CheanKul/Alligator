@@ -28,7 +28,7 @@ namespace Alligator.Persistence {
 
         public User Get (string username,string password)
         {
-            return context.Users.Find<User> (User => User.Email == username && User.Password == password).FirstOrDefault ();
+            return context.Users.Find<User> (User => User.Username == username && User.Password == password).FirstOrDefault ();
         }
 
         public User Create (User User) {

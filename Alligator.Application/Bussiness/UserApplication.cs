@@ -34,7 +34,7 @@ namespace Alligator.Application
             }
 
             var claims = new[] {
-                new Claim (JwtRegisteredClaimNames.Sub, User.Email),
+                new Claim (JwtRegisteredClaimNames.Sub, User.Username),
                 new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid ().ToString ())
             };
 
@@ -75,7 +75,7 @@ namespace Alligator.Application
             }
 
             var claims = new[] {
-                new Claim (JwtRegisteredClaimNames.Sub, usr.Email),
+                new Claim (JwtRegisteredClaimNames.Sub, usr.Username),
                 new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid ().ToString ())
             };
 
