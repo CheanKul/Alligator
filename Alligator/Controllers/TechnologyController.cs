@@ -36,7 +36,6 @@ namespace Alligator.Controllers
 
         [HttpPost]
         [Route("UpdateTechnology")]
-        [Authorize]
         public async Task<IActionResult> UpdateTechnologyAsync([FromForm] TechnologyModel technologyModel)
         {
             try
